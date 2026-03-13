@@ -8,5 +8,5 @@ const useraSchema = new Schema ({
     createdAt :{type :Date, default: Date.now}
 })
 
-const User = mongoose.model("User" ,useSchema)
+const User = mongoose.model("User" ,useraSchema)
 module.exprots = User

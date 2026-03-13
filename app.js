@@ -1,24 +1,26 @@
-const dotenv = require(dotenv)
+const dotenv = require("dotenv")
 dotenv.config()
-
 const express = require("express")
 const connectDB = require("./config/db");
 
-const authRoutes = require("./Routes/authRoutes")
-const subscriptionRoutes = require("./Routes/adminRoutes");
-const adminRoutes = require("./Routes/subscriptionroutes");
-
-const app=express()
+const app = express()
 connectDB()
 
-app.use("/auth",authRoutes)
-app.use("/subscription",subscriptionRoutes)
-app.use("/admin",adminRoutes)
+app.use(express.json())
 
-app.use((err,req,res,next)=>{
-    const status =err.statusCode || 500
-    res.status(status).json({error : err.message || "Server Error"})
+// test route
+app.get("/", (req, res) => {
+  res.json({ message: "server is working!" })
 })
-app.listen(process.env.PORT || 3000 , () =>
-    console.log(`server is running on port ${process.env.PORT || 3000}`) 
-)
+
+app.use((err, req, res, next) => {
+  const status = err.statusCode || 500
+  res.status(status).json({ error: err.message || "Server Error" })
+})
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}`)
+})
+
+module.exports = app
