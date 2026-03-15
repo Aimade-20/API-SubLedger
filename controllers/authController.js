@@ -1,4 +1,4 @@
-const {validationResult} =require("express-validatour")
+const {validationResult} =require("express-validator")
 const {register ,login} =require("../services/authServices")
 
 const registerUser = async(req , res ,next) =>{
